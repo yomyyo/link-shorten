@@ -37,6 +37,7 @@ class Redirect extends Component {
     return (
       <div>
         <h1>Redirecting</h1>
+        <p>If you are on this page for more than 10 seconds, the shortened link may be broken</p>
       </div>
     );
   }

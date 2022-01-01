@@ -1,0 +1,20 @@
+.form-group {
+    padding: 10px;
+}
+
+.btn-secondary {
+    padding: 10px;
+    margin-top: 10px;
+}
+
+.error-msg {
+    color: red;
+}
+
+.success-msg {
+    color: green;
+}
+
+.form-control {
+    width: 50%;
+}

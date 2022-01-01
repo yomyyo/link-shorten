@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 // This will require to npm install axios
 import axios from 'axios';
- 
+import "bootstrap/dist/css/bootstrap.css";
+import "./create.css";
+
 export default class Create extends Component {
   // This is the constructor that stores the data.
   constructor(props) {
@@ -57,12 +59,18 @@ export default class Create extends Component {
         })
       }
     }
+
+    if(this.state.url == "" || this.state.original == ""){
+    this.setState({
+      submitted: "empty"
+    })
+    }
     // When post request is sent to the create url, axios will add a new record(newperson) to the database.
     const url = {
       original: this.state.original,
       url: this.state.url,
     };
-    if(this.state.submitted !== "invalid"){
+    if(this.state.submitted !== "invalid" && this.state.submitted !== "empty"){
       axios
         .get("http://localhost:3001/"+this.state.url)
         .then((res) => {
@@ -91,7 +99,7 @@ export default class Create extends Component {
   render() {
     return (
       <div style={{ marginTop: 20 }}>
-        <h3>Create New Link</h3>
+        <h3 className="form-group">Create New Link</h3>
         <form onSubmit={this.onSubmit}>
           <div className="form-group">
             <label>Original Link </label>
@@ -110,7 +118,7 @@ export default class Create extends Component {
               value={this.state.url}
               onChange={this.onChangeurl}
             />
-            <button onClick={this.onClick}>Generate Random Link</button>
+            <button className="btn btn-secondary" onClick={this.onClick}>Generate Random Link</button>
           </div>
           <div className="form-group">
             <input
@@ -120,9 +128,10 @@ export default class Create extends Component {
             />
           </div>
           <div id="generatedLink">
-            {this.state.submitted === true && <p>Your new link is at <a href={"http://localhost:3000/" + this.state.savedUrl}>http://localhost:3000/{this.state.savedUrl}</a></p>}
-            {this.state.submitted === "wrong" && <p>Your new link is not unique. Please try again.</p>}
-            {this.state.submitted === "invalid" && <p>Your new link is contains invalid characters. Please try again.</p>}
+            {this.state.submitted === true && <p className="success-msg">Your new link is at <a href={"http://localhost:3000/" + this.state.savedUrl}>http://localhost:3000/{this.state.savedUrl}</a></p>}
+            {this.state.submitted === "wrong" && <p className="error-msg">Your new link is not unique. Please try again.</p>}
+            {this.state.submitted === "invalid" && <p className="error-msg">Your new link is contains invalid characters. Please try again.</p>}
+            {this.state.submitted === "empty" && <p className="error-msg">Cannot submit with empty values. Please try again.</p>}
           </div>
         </form>
       </div>

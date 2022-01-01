@@ -4,20 +4,18 @@ import React from "react";
 import { Route } from "react-router-dom";
 
 // We import all the components we need in our app
-import Navbar from "./components/navbar";
+import "bootstrap/dist/css/bootstrap.css";
+
 import Redirect from "./components/redirect";
 import Create from "./components/create";
 
 const App = () => {
   return (
     <div>
-      <Navbar />
       <Route exact path="/">
-      </Route>
-      {!(window.location.href.indexOf("create") > -1) && <Route path="/:url" component={Redirect} />}
-      <Route path="/create">
         <Create />
       </Route>
+      {!(window.location.href.indexOf("create") > -1) && <Route path="/:url" component={Redirect} />}
     </div>
   );
 };
