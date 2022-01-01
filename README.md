@@ -21,7 +21,7 @@ Once done, you can visit localhost:3000 to use this application
 
 -----------------------
 
-My solution on shortening URLs:
+# My solution on shortening URLs:
 
 All I did was take the original long url, and the url the user provided, and store them both in a database. 
 
@@ -29,7 +29,7 @@ Then when the user vists the short url, it will pull the original long url from 
 
 -----------------------
 
-Problems with my solution:
+# Problems with my solution:
 
 I didn't have enough time to debug the build and deploy to a server, so the application is running on two different ports on localhost. The front end is running on port 3000, and the back end is running on 3001.
 
