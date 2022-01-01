@@ -13,6 +13,7 @@ export default class Create extends Component {
     this.onChangeurl = this.onChangeurl.bind(this);
     this.onClick = this.onClick.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+
  
     this.state = {
       original: "",
@@ -21,6 +22,8 @@ export default class Create extends Component {
       savedUrl: ""
     };
   }
+
+  
  
   // These methods will update the state properties.
   onChangeOriginal(e) {
@@ -50,26 +53,20 @@ export default class Create extends Component {
 // This function will handle the submission.
   onSubmit(e) {
     e.preventDefault();
-    
-    const invalidChars = "!@#$%^&*()_{}|:\"[];'<>?,./-=+`~'".split("");
-    for(let i = 0; i < invalidChars.length; i++){
-      if(this.state.url.includes(invalidChars[i])){
-        this.setState({
-          submitted: "invalid"
-        })
-      }
-    }
 
-    if(this.state.url == "" || this.state.original == ""){
+    //check if any of thhe fields are empty
+    if(this.state.url === "" || this.state.original === ""){
     this.setState({
       submitted: "empty"
     })
     }
-    // When post request is sent to the create url, axios will add a new record(newperson) to the database.
+    // When post request is sent to the create url, axios will add a new link to the database.
     const url = {
       original: this.state.original,
       url: this.state.url,
     };
+
+    // Validate the  users data
     if(this.state.submitted !== "invalid" && this.state.submitted !== "empty"){
       axios
         .get("http://localhost:3001/"+this.state.url)
@@ -87,6 +84,7 @@ export default class Create extends Component {
               savedUrl: url.url
               });
           } else {
+            // If there is already a url in the database that is the same as the one the user set
             this.setState({
               submitted: "wrong"
             })
@@ -110,17 +108,27 @@ export default class Create extends Component {
               onChange={this.onChangeOriginal}
             />
           </div>
+          
           <div className="form-group">
-            <label>Custom Link address: </label>
-            <input
-              type="text"
-              className="form-control"
-              value={this.state.url}
-              onChange={this.onChangeurl}
-            />
+            <label >Custom Link address: </label>
+              <div  className="same-line">
+              
+                <div className="cell"><p>localhost:3000/ </p></div>
+                <div className="cell">
+                <input
+                  type="text"
+                  className="form-control"
+                  value={this.state.url}
+                  onChange={this.onChangeurl}
+                />
+                </div>
+              
+              </div> 
             <button className="btn btn-secondary" onClick={this.onClick}>Generate Random Link</button>
           </div>
+          
           <div className="form-group">
+          
             <input
               type="submit"
               value="Create link"
@@ -134,6 +142,7 @@ export default class Create extends Component {
             {this.state.submitted === "empty" && <p className="error-msg">Cannot submit with empty values. Please try again.</p>}
           </div>
         </form>
+
       </div>
     );
   }

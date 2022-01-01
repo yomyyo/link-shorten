@@ -18,3 +18,12 @@
 .form-control {
     width: 50%;
 }
+
+.same-line{
+    display: table;
+}
+
+.cell {
+    display: table-cell;
+    padding: 3px
+}

@@ -14,7 +14,7 @@ class Redirect extends Component {
       url: "",
     };
   }
-  // This will get the record based on the id from the database.
+  // This will get the record based on the url from the database.
   componentDidMount() {
     axios
       .get("http://localhost:3001/" + this.props.match.params.url)
@@ -32,7 +32,7 @@ class Redirect extends Component {
  
 
  
-  // This following section will display the update-form that takes the input from the user to update the data.
+  // this page will show when users go to their url. if the url is invalid, there is a warning
   render() {
     return (
       <div>
@@ -43,7 +43,5 @@ class Redirect extends Component {
   }
 }
  
-// You can get access to the history object's properties and the closest <Route>'s match via the withRouter
-// higher-order component. This makes it easier for us to edit our records.
  
 export default withRouter(Redirect);

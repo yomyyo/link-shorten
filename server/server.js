@@ -17,8 +17,8 @@ const routes = require("./routes");
 const app = express();
 
 
-// if we are in production, use production port, otherwise use port 3001
-const PORT = process.env.PORT || 3001;
+// use port 3001
+const PORT = 3001;
 
 // middleware functions
 
@@ -27,11 +27,6 @@ app.use(express.urlencoded({ extended: true }));
 //convert to json
 app.use(express.json());
 app.use(cors());
-
-//if we are in production, use the client/build folder for the base folder
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static("client/build"));
-}
 
 // use the routes we defined
 app.use(routes);
